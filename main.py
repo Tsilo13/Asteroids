@@ -1,5 +1,7 @@
+import sys
 import pygame
 from constants import *
+from circleshape import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -20,6 +22,7 @@ def main():
     AsteroidField.containers = (updatable,)
     # create asteroid field object
     asteroid_field = AsteroidField()
+    
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
     # object groups 
@@ -31,6 +34,12 @@ def main():
                 running = False # exits infinite loop
 
         updatable.update(dt)
+
+        for asteroid in asteroids:
+            if asteroid.check_collision(player) == True:
+                print("Game over!")
+                sys.exit()
+        
 
         screen.fill("black") # screen color and fill
 
