@@ -1,17 +1,23 @@
 import pygame
 from constants import *
+from player import Player
 
 def main():
     pygame.init() #initialize the game engine
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # display mode
+    clock = pygame.time.Clock()
+    running = True
+    dt = 0
 
-    while True: # game loop
+    while running: # game loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT: # X button on window
-                return # exits infinite loop
+                running = False # exits infinite loop
 
         screen.fill("black") # screen color and fill
-        pygame.display.flip() # updates display      
+        player.draw(screen)
+        pygame.display.flip() # updates display
+        dt = clock.tick(60) / 1000 # sets/limits the framerate to 60      
 
 
 if __name__ == "__main__":
